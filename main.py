@@ -1,6 +1,8 @@
 import requests
 import selectorlib
 
+from send_email import send_email
+
 URL = "https://programmer100.pythonanywhere.com/tours/"
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) '
@@ -21,10 +23,6 @@ def extract(source):
     return value
 
 
-def send_email():
-    print("Email was sent!")
-
-
 def store(extracted):
     with open("data.txt", 'a') as file:
         file.write(extracted + "\n")
@@ -43,5 +41,7 @@ if __name__ == "__main__":
     if extracted != "No upcoming tours":
         if extracted not in content:
             store(extracted)
-            send_email()
-
+            send_email("""\
+Subject: New event
+Hey, new event was found!
+""")
