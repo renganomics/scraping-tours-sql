@@ -1,5 +1,6 @@
 import requests
 import selectorlib
+import time
 
 from send_email import send_email
 
@@ -34,14 +35,18 @@ def read(extracted):
 
 
 if __name__ == "__main__":
-    scraped = scrape(URL)
-    extracted = extract(scraped)
-    print(extracted)
-    content = read(extracted)
-    if extracted != "No upcoming tours":
-        if extracted not in content:
-            store(extracted)
-            send_email("""\
+    while True:
+        scraped = scrape(URL)
+        extracted = extract(scraped)
+        print(extracted)
+
+        content = read(extracted)
+        if extracted != "No upcoming tours":
+            if extracted not in content:
+                store(extracted)
+                send_email("""\
 Subject: New event
 Hey, new event was found!
 """)
+                print("An email was sent!")
+        time.sleep(2)
