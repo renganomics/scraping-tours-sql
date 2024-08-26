@@ -4,6 +4,10 @@ import time
 
 from send_email import send_email
 
+"INSERT INTO events VALUES ('Tigers', 'Tiger City', '2088.10.10')"
+"SELECT * FROM events WHERE date='2088.10.15'"
+
+
 URL = "https://programmer100.pythonanywhere.com/tours/"
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) '
